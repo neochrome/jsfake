@@ -38,7 +38,7 @@ describe('createStubFor function', function(){
 	});
 
 	it('should bind this to instance in stubbed method', function(){
-		var fake= a.fake(SomeClass);
+		var fake = a.fake(SomeClass);
 		fake.prop = 'value';
 		fake.protoMethodWithoutArgs.whenCalled(function(){
 			throw this.prop;
@@ -53,7 +53,7 @@ describe('createStubFor function', function(){
 		}).toThrow();
 	});
 
-	it('should track number of time a method is called', function(){
+	it('should track number of times a method is called', function(){
 		var fake = a.fake(SomeClass);
 		expect(fake.protoMethodWithoutArgs.numberOfCalls).toBe(0);
 		fake.protoMethodWithoutArgs();
