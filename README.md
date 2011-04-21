@@ -37,4 +37,4 @@ A fake also keeps tabs on the number of calls made to any of it's functions.
 	fakedArray.sort();
 	fakedArray.sort.numberOfCalls === 1;
 
-Go ahead and fake my day.
+Go ahead fake my day.
