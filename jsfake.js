@@ -1,18 +1,37 @@
 (function($){
-	if($.a){ throw 'the a-namespace already exists'; }
+	if($.a){ throw 'the "a" namespace already exists'; }
+	if($.any){ throw 'the "any" namespace already exists'; }
 	$.a = {};
+	$.any = {};
 
-	$.a.fake = function(blueprint){ return new $.a.Fake(blueprint); };
+	$.a.fake = function(blueprint){
+		return new $.a.Fake(blueprint);
+	};
 	$.a.Fake = function(blueprint){
 		_interceptMethodsFor.call(this, blueprint.prototype);
 		_interceptMethodsFor.call(this, blueprint);
 	};
 
+	$.any.callOn = function(fake){
+		return {
+			_fake: fake,
+			throws: function(){
+				for(var methodName in this._fake){
+					this._fake[methodName].behavior = _unexpected;
+				}
+				return this._fake;
+			}
+		};
+	};
+
 	var _noop = function(){};
+	var _unexpected = function(){throw 'unexpected call';};
 
 	var _interceptMethodsFor = function(obj){
 		for(var methodName in obj){
-			if(obj[methodName] instanceof Function){
+			var isFunction = obj[methodName] instanceof Function;
+			var isPublic = methodName[0] !== '_';
+			if(isFunction && isPublic){
 				this[methodName] = _createInterceptedMethod();
 			}
 		}
