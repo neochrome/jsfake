@@ -31,7 +31,7 @@ describe('jsFake', function(){
 
 	it('should support "strict" behavior for stubbed methods', function(){
 		var fake = a.fake(SomeClass);
-		any.callOn(fake).throws();
+		any.callTo(fake).willThrow();
 		expect(function(){fake.protoMethodWithoutArgs();}).toThrow();
 	});
 

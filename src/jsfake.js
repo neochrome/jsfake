@@ -12,10 +12,10 @@
 		_interceptMethodsFor.call(this, blueprint);
 	};
 
-	$.any.callOn = function(fake){
+	$.any.callTo = function(fake){
 		return {
 			_fake: fake,
-			throws: function(){
+			willThrow: function(){
 				for(var methodName in this._fake){
 					this._fake[methodName].behavior = _unexpected;
 				}
@@ -35,7 +35,7 @@
 				this[methodName] = _createInterceptedMethod();
 			}
 		}
-	}
+	};
 
 	var _createInterceptedMethod = function(){
 		var method = function(){
@@ -46,5 +46,5 @@
 		method.behavior = _noop;
 		method.whenCalled = function(newBehavior){ method.behavior = newBehavior; };
 		return method;
-	}
+	};
 })(this);
