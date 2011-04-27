@@ -39,6 +39,6 @@ A fake also keeps tabs on the number of calls made to any of it's functions.
 
 If the fake is going to be used for strict mocking purposes, it might be useful to have it throw exceptions for all function calls except for those with custom behavior specified.
 
-	any.callTo(fake).willThrow();
+	any.callTo(fakedObject).willThrow();
 
 Go ahead fake my day.
